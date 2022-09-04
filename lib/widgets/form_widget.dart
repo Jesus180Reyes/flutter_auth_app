@@ -43,6 +43,7 @@ class FormWidget extends StatelessWidget {
               color: Colors.grey[200],
             ),
             child: TextField(
+              controller: controller,
               keyboardType: textInputType,
               autocorrect: false,
               obscureText: (isPassword == true) ? true : false,
