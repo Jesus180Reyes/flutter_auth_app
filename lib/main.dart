@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:node_app_frontend/pages/home_page.dart';
 import 'package:node_app_frontend/pages/login_page.dart';
+import 'package:node_app_frontend/pages/home_page.dart';
 import 'package:node_app_frontend/pages/register_page.dart';
 
 void main() => runApp(const MyApp());
@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FrontEnd NodeJs Auth',
-      initialRoute: 'home',
+      initialRoute: 'login',
       routes: {
-        'home': (_) => const HomePage(),
         'login': (_) => const LoginPage(),
+        'home': (_) => const HomePage(),
         'register': (_) => const RegisterPage(),
       },
     );
