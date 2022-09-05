@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'FrontEnd NodeJs Auth',
-        initialRoute: 'login',
+        initialRoute: 'home',
         routes: {
           'login': (_) => const LoginPage(),
           'home': (_) => const HomePage(),

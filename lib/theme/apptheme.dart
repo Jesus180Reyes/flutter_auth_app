@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 class AppTheme {
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: Colors.white,
+    iconTheme: const IconThemeData(size: 30),
   );
 }
 
