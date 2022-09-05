@@ -60,7 +60,8 @@ class Usuario {
         isOnline: json["isOnline"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        img: json["img"],
+        img: json["img"] ??
+            'https://res.cloudinary.com/dxzafq3oh/image/upload/v1662406100/user_qwgkj9.png',
         uid: json["uid"],
       );
 
