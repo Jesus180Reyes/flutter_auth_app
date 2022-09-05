@@ -40,7 +40,7 @@ class Usuario {
     required this.isOnline,
     required this.createdAt,
     required this.updatedAt,
-    required this.img,
+    this.img,
     required this.uid,
   });
 
@@ -50,7 +50,7 @@ class Usuario {
   final bool isOnline;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String img;
+  final String? img;
   final String uid;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
