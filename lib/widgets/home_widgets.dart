@@ -10,6 +10,7 @@ class HomeWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<LoginProvider>(context).usuario;
+    final authProvider = Provider.of<LoginProvider>(context);
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -42,7 +43,10 @@ class HomeWidgets extends StatelessWidget {
                 color: Colors.orange,
                 icon: Icons.person,
                 title: 'Usuarios',
-                onTap: () {},
+                onTap: () async {
+                  await authProvider.getUsuarios();
+                  Navigator.pushNamed(context, "users");
+                },
                 color2: Colors.amber,
                 icon2: Icons.accessible_forward,
                 title2: 'Conectados',
