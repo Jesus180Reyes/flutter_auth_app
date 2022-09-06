@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:node_app_frontend/global/enviroment.dart';
@@ -7,8 +8,10 @@ import 'package:node_app_frontend/models/login.dart';
 class LoginProvider extends ChangeNotifier {
   Usuario? usuario;
   bool? isLoading;
+  File? newPictureFile;
   Future login({required String email, required String password}) async {
     isLoading = true;
+    notifyListeners();
     final data = {
       "email": email,
       "password": password,
@@ -20,6 +23,8 @@ class LoginProvider extends ChangeNotifier {
       headers: {"Content-Type": 'application/json'},
     );
     isLoading = false;
+    notifyListeners();
+
     if (resp.statusCode == 200) {
       final loginResponse = loginFromJson(resp.body);
       usuario = loginResponse.usuario;
@@ -39,6 +44,7 @@ class LoginProvider extends ChangeNotifier {
   }) async {
     try {
       isLoading = true;
+      notifyListeners();
       final data = {
         "nombre": nombre,
         "email": email,
@@ -52,6 +58,7 @@ class LoginProvider extends ChangeNotifier {
         headers: {"Content-Type": 'application/json'},
       );
       isLoading = false;
+      notifyListeners();
       if (resp.statusCode == 201) {
         final loginResponse = loginFromJson(resp.body);
         usuario = loginResponse.usuario;
@@ -67,5 +74,41 @@ class LoginProvider extends ChangeNotifier {
       print(err);
       throw Exception(err);
     }
+  }
+
+  void updateSelectedImage(String path) {
+    isLoading = true;
+    notifyListeners();
+    usuario!.img = path;
+    newPictureFile = File.fromUri(Uri(path: path));
+    notifyListeners();
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future updatePhoto() async {
+    isLoading = true;
+    notifyListeners();
+    if (newPictureFile == null) return null;
+    final url =
+        Uri.parse('${Environment.apiUrl}/uploads/usuarios/${usuario!.uid}');
+
+    final imageUploadRequest = http.MultipartRequest("PUT", url);
+    final file =
+        await http.MultipartFile.fromPath('archivo', newPictureFile!.path);
+    imageUploadRequest.files.add(file);
+    final streamResponse = await imageUploadRequest.send();
+    final resp = await http.Response.fromStream(streamResponse);
+    isLoading = false;
+    notifyListeners();
+    if (resp.statusCode != 200 && resp.statusCode != 201) {
+      return null;
+    }
+
+    newPictureFile = null;
+
+    final decodedData = json.decode(resp.body);
+    print(resp.body);
+    return decodedData['img'];
   }
 }
