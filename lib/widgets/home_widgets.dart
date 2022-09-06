@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:node_app_frontend/helpers/custom_circlesavatars.dart';
+import 'package:node_app_frontend/providers/login_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeWidgets extends StatelessWidget {
   const HomeWidgets({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LoginProvider>(context).usuario;
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -18,9 +21,9 @@ class HomeWidgets extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text(
-                'Hola Luis!',
-                style: TextStyle(fontSize: 20),
+              Text(
+                (user!.nombre.isNotEmpty) ? 'Hola ${user.nombre}!' : '',
+                style: const TextStyle(fontSize: 20),
               ),
               const Text(
                 'En que te podemos Ayudar?',
@@ -48,7 +51,7 @@ class HomeWidgets extends StatelessWidget {
                 color: Colors.indigo,
                 icon: Icons.person_outline_rounded,
                 title: 'Perfil',
-                onTap: () {},
+                onTap: () => Navigator.pushNamed(context, 'profile'),
                 color2: Colors.cyan,
                 icon2: Icons.padding_sharp,
                 title2: 'ALGO',

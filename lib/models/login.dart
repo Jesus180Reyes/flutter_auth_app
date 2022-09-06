@@ -50,7 +50,7 @@ class Usuario {
   final bool isOnline;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String? img;
+  String? img;
   final String uid;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
