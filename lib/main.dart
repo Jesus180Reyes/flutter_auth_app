@@ -4,7 +4,9 @@ import 'package:node_app_frontend/pages/login_page.dart';
 import 'package:node_app_frontend/pages/home_page.dart';
 import 'package:node_app_frontend/pages/profile_page.dart';
 import 'package:node_app_frontend/pages/register_page.dart';
+import 'package:node_app_frontend/pages/users_pages.dart';
 import 'package:node_app_frontend/providers/login_provider.dart';
+import 'package:node_app_frontend/theme/apptheme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,11 +26,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'FrontEnd NodeJs Auth',
         initialRoute: 'login',
+        theme: AppTheme.lightTheme,
         routes: {
           'login': (_) => const LoginPage(),
           'home': (_) => const HomePage(),
           'register': (_) => const RegisterPage(),
           'profile': (_) => const ProfilePage(),
+          'users': (_) => const UsersPage(),
         },
       ),
     );

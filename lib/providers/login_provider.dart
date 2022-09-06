@@ -4,11 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:node_app_frontend/global/enviroment.dart';
 import 'package:node_app_frontend/models/login.dart';
+import 'package:node_app_frontend/models/users_model.dart';
 
 class LoginProvider extends ChangeNotifier {
   Usuario? usuario;
+  List<Usuario>? users;
   bool? isLoading;
   File? newPictureFile;
+
   Future login({required String email, required String password}) async {
     isLoading = true;
     notifyListeners();
@@ -62,7 +65,6 @@ class LoginProvider extends ChangeNotifier {
       if (resp.statusCode == 201) {
         final loginResponse = loginFromJson(resp.body);
         usuario = loginResponse.usuario;
-        print(resp.body);
         notifyListeners();
         return true;
       } else {
@@ -108,7 +110,17 @@ class LoginProvider extends ChangeNotifier {
     newPictureFile = null;
 
     final decodedData = json.decode(resp.body);
-    print(resp.body);
     return decodedData['img'];
+  }
+
+  Future getUsuarios() async {
+    isLoading = true;
+    notifyListeners();
+    final url = Uri.parse('${Environment.apiUrl}/usuarios');
+    final resp = await http.get(url);
+    final usersResponse = usersModelFromJson(resp.body);
+    users = usersResponse.usuarios;
+    isLoading = false;
+    notifyListeners();
   }
 }
