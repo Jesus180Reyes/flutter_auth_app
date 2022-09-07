@@ -34,7 +34,10 @@ class HomeWidgets extends StatelessWidget {
                   color: Colors.pink,
                   icon: Icons.timer_sharp,
                   title: 'Trips',
-                  onTap: () {},
+                  onTap: () async {
+                    await authProvider.getTrips();
+                    Navigator.pushNamed(context, 'trips');
+                  },
                   color2: Colors.purple,
                   icon2: Icons.track_changes,
                   title2: 'Conductores',
