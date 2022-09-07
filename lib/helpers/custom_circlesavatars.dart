@@ -8,12 +8,14 @@ class CustomAvatars extends StatelessWidget {
   final String title;
   final String title2;
   final Function onTap;
+  final Function onTap2;
   const CustomAvatars({
     Key? key,
     required this.color,
     required this.icon,
     required this.title,
     required this.onTap,
+    required this.onTap2,
     required this.color2,
     required this.icon2,
     required this.title2,
@@ -61,28 +63,37 @@ class CustomAvatars extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 15),
-        CircleAvatar(
-          radius: 65,
-          backgroundColor: color2,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon2,
-                size: 50,
-                color: Colors.white,
-              ),
-              FittedBox(
-                child: Text(
-                  title2,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+        GestureDetector(
+          onTap: () {
+            // ignore: unnecessary_null_comparison
+            if (onTap2 == null) {
+              return;
+            }
+            onTap2();
+          },
+          child: CircleAvatar(
+            radius: 65,
+            backgroundColor: color2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon2,
+                  size: 50,
+                  color: Colors.white,
+                ),
+                FittedBox(
+                  child: Text(
+                    title2,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
