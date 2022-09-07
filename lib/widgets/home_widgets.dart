@@ -31,14 +31,17 @@ class HomeWidgets extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               CustomAvatars(
-                color: Colors.pink,
-                icon: Icons.timer_sharp,
-                title: 'Trips',
-                onTap: () {},
-                color2: Colors.purple,
-                icon2: Icons.track_changes,
-                title2: 'Conductores',
-              ),
+                  color: Colors.pink,
+                  icon: Icons.timer_sharp,
+                  title: 'Trips',
+                  onTap: () {},
+                  color2: Colors.purple,
+                  icon2: Icons.track_changes,
+                  title2: 'Conductores',
+                  onTap2: () async {
+                    await authProvider.getConductores();
+                    Navigator.pushNamed(context, 'conductores');
+                  }),
               CustomAvatars(
                 color: Colors.orange,
                 icon: Icons.person,
@@ -50,6 +53,7 @@ class HomeWidgets extends StatelessWidget {
                 color2: Colors.amber,
                 icon2: Icons.accessible_forward,
                 title2: 'Conectados',
+                onTap2: () {},
               ),
               CustomAvatars(
                 color: Colors.indigo,
@@ -59,6 +63,7 @@ class HomeWidgets extends StatelessWidget {
                 color2: Colors.cyan,
                 icon2: Icons.padding_sharp,
                 title2: 'ALGO',
+                onTap2: () {},
               ),
             ],
           ),

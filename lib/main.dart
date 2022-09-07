@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:node_app_frontend/pages/conductores_page.dart';
 import 'package:node_app_frontend/pages/login_page.dart';
 import 'package:node_app_frontend/pages/home_page.dart';
 import 'package:node_app_frontend/pages/profile_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           'register': (_) => const RegisterPage(),
           'profile': (_) => const ProfilePage(),
           'users': (_) => const UsersPage(),
+          'conductores': (_) => const ConductoresPage(),
         },
       ),
     );
