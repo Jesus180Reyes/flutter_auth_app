@@ -183,4 +183,35 @@ class LoginProvider extends ChangeNotifier {
       return respBody["msg"];
     }
   }
+
+  Future createConductor({
+    required String rnp,
+    required String nombre,
+    required String vehiculo,
+    required String plate,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+    final data = {
+      "rnp": rnp,
+      "nombre": nombre,
+      "vehiculo": vehiculo,
+      "plate": plate,
+    };
+    final url = Uri.parse('${Environment.apiUrl}/conductores');
+    final resp = await http.post(
+      url,
+      body: json.encode(data),
+      headers: {"Content-Type": 'application/json', "x-token": token!},
+    );
+    isLoading = false;
+    notifyListeners();
+    if (resp.statusCode == 200 || resp.statusCode == 201) {
+      notifyListeners();
+      return true;
+    } else {
+      final respBody = jsonDecode(resp.body);
+      return respBody["msg"];
+    }
+  }
 }

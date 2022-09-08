@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:node_app_frontend/pages/conductores_page.dart';
+import 'package:node_app_frontend/pages/crearconductores_page.dart';
 import 'package:node_app_frontend/pages/create_trip_page.dart';
 import 'package:node_app_frontend/pages/login_page.dart';
 import 'package:node_app_frontend/pages/home_page.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
           'trips': (_) => const TripsPage(),
           'tripsD': (_) => const TripsDetailsPage(),
           'createT': (_) => const CreateTripPage(),
+          'createC': (_) => const CrearConductoresPage(),
         },
       ),
     );
