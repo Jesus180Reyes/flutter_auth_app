@@ -12,6 +12,7 @@ class LoginProvider extends ChangeNotifier {
   Usuario? usuario;
   List<Usuario>? users;
   List<Conductores>? conductores;
+  String? token;
   List<Trip>? trips;
   bool? isLoading;
   File? newPictureFile;
@@ -35,6 +36,7 @@ class LoginProvider extends ChangeNotifier {
     if (resp.statusCode == 200) {
       final loginResponse = loginFromJson(resp.body);
       usuario = loginResponse.usuario;
+      token = loginResponse.token;
       notifyListeners();
       return true;
     } else {
@@ -69,6 +71,7 @@ class LoginProvider extends ChangeNotifier {
       if (resp.statusCode == 201) {
         final loginResponse = loginFromJson(resp.body);
         usuario = loginResponse.usuario;
+        token = loginResponse.token;
         notifyListeners();
         return true;
       } else {
@@ -148,5 +151,36 @@ class LoginProvider extends ChangeNotifier {
     trips = tripsResponse.trip;
     isLoading = false;
     notifyListeners();
+  }
+
+  Future createTrip({
+    required String origen,
+    required String destino,
+    required String conductor,
+    required String cargamento,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+    final data = {
+      "origen": origen,
+      "destino": destino,
+      "conductor": conductor,
+      "cargamento": cargamento,
+    };
+    final url = Uri.parse('${Environment.apiUrl}/trips');
+    final resp = await http.post(
+      url,
+      body: json.encode(data),
+      headers: {"Content-Type": 'application/json', "x-token": token!},
+    );
+    isLoading = false;
+    notifyListeners();
+    if (resp.statusCode == 200) {
+      notifyListeners();
+      return true;
+    } else {
+      final respBody = jsonDecode(resp.body);
+      return respBody["msg"];
+    }
   }
 }
