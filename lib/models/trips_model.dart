@@ -40,11 +40,13 @@ class Trip {
     required this.recibidoPor,
     required this.createdAt,
     required this.conductor,
+    this.cargamento,
     required this.uid,
   });
 
   final String origen;
   final String destino;
+  final String? cargamento;
   final dynamic recibidoPor;
   final DateTime createdAt;
   final Conductor conductor;
@@ -54,6 +56,7 @@ class Trip {
         origen: json["origen"],
         destino: json["destino"],
         recibidoPor: json["recibidoPor"],
+        cargamento: json["cargamento"],
         createdAt: DateTime.parse(json["createdAt"]),
         conductor: Conductor.fromJson(json["conductor"]),
         uid: json["uid"],
@@ -63,6 +66,7 @@ class Trip {
         "origen": origen,
         "destino": destino,
         "recibidoPor": recibidoPor,
+        "cargamento": cargamento,
         "createdAt": createdAt.toIso8601String(),
         "conductor": conductor.toJson(),
         "uid": uid,

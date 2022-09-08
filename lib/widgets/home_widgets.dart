@@ -83,6 +83,7 @@ class _CustomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<LoginProvider>(context);
     return SizedBox(
       height: 50,
       child: Row(
@@ -100,8 +101,11 @@ class _CustomAppbar extends StatelessWidget {
             style: TextStyle(fontSize: 18),
           ),
           IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications_none_rounded))
+              onPressed: () async {
+                await authProvider.getConductores();
+                Navigator.pushNamed(context, "createT");
+              },
+              icon: const Icon(Icons.add))
         ],
       ),
     );
