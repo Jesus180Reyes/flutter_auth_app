@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:node_app_frontend/helpers/custom_circlesavatars.dart';
+import 'package:node_app_frontend/helpers/custom_dialog.dart';
 import 'package:node_app_frontend/providers/login_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -103,7 +104,7 @@ class _CustomAppbar extends StatelessWidget {
           IconButton(
               onPressed: () async {
                 await authProvider.getConductores();
-                Navigator.pushNamed(context, "createT");
+                customDialog(context);
               },
               icon: const Icon(Icons.add))
         ],
