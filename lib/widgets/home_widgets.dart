@@ -55,7 +55,7 @@ class HomeWidgets extends StatelessWidget {
                   Navigator.pushNamed(context, "users");
                 },
                 color2: Colors.amber,
-                icon2: Icons.accessible_forward,
+                icon2: Icons.connect_without_contact,
                 title2: 'Conectados',
                 onTap2: () {},
               ),
@@ -66,7 +66,7 @@ class HomeWidgets extends StatelessWidget {
                 onTap: () => Navigator.pushNamed(context, 'profile'),
                 color2: Colors.cyan,
                 icon2: Icons.padding_sharp,
-                title2: 'ALGO',
+                title2: 'Argumentos',
                 onTap2: () {},
               ),
             ],
